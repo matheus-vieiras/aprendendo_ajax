@@ -9,11 +9,41 @@
 </head>
 
 <body class="conteudo exercicio">
-    <h1>jQuery Get/Post</h1>
-    <div id="get"></div>
-    <div id="post"></div>
+<h1>jQuery Get/Post</h1>
+<div id="get"></div>
+<div id="post"></div>
 
-    <script>
-        // ...
-    </script>
+<script>
+    function exibirResultado(id, dados) {
+        const texto = JSON.stringify(dados)
+        document.getElementById(id).innerHTML = texto
+    }
+
+    $.ajax({
+        url: 'parOuImpar',
+        data: {
+            numero: 10
+        },
+        success(data) {
+            exibirResultado('get', data)
+        }
+    })
+
+    $.ajax({
+        url: 'formulario',
+        method: 'post',
+        data: {
+            nome: 'Matheus',
+            sobrenome: 'Vieira'
+        },
+        success(data) {
+            exibirResultado('post', data)
+        },
+        error(e) {
+            exibirResultado('post', e)
+        }
+    })
+
+
+</script>
 </body>
